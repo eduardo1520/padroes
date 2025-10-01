@@ -3,23 +3,12 @@
   "name": "padroes-projeto",
   "version": "1.0.0",
   "description": "Projeto com Strategy Pattern e Arquitetura Hexagonal",
-  "main": "src/main.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node src/main.js",
-    "test": "jasmine",
-    "test:coverage": "c8 --exclude='src/main.js' --exclude='spec/**' --exclude='app.js' jasmine",
-    "test:unit": "jasmine spec/domain/**/*Spec.js",
-    "test:integration": "jasmine spec/integration/**/*Spec.js"
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "strategy-pattern",
-    "hexagonal-architecture",
-    "design-patterns"
-  ],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "jasmine": "^5.0.0",
-    "c8": "^8.0.0"
-  }
+  "keywords": ["strategy-pattern", "hexagonal-architecture", "design-patterns"],
+  "author": "edumiol",
+  "license": "ISC"
 }
