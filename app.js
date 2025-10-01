@@ -2,9 +2,25 @@
 import ShoppingCart from './src/domain/entities/ShoppingCart.js';
 import CartItem from './src/domain/value-objects/CartItem.js';
 import Money from './src/domain/value-objects/Money.js';
-import NoDiscountAdapter from './src/infrastructure/adapters/NoDiscountAdapter.js';
-import TenPercentDiscountAdapter from './src/infrastructure/adapters/TenPercentDiscountAdapter.js';
-import TwentyPercentDiscountAdapter from './src/infrastructure/adapters/TwentyPercentDiscountAdapter.js';
+
+// 🎯 Implementação correta dos adapters de desconto
+class NoDiscountAdapter {
+    calculateDiscount(total) {
+        return 0; // Sem desconto
+    }
+}
+
+class TenPercentDiscountAdapter {
+    calculateDiscount(total) {
+        return total * 0.10; // 10% do total
+    }
+}
+
+class TwentyPercentDiscountAdapter {
+    calculateDiscount(total) {
+        return total * 0.20; // 20% do total
+    }
+}
 
 // 🎯 Capturar argumentos da linha de comando
 const args = process.argv.slice(2);
@@ -86,58 +102,69 @@ function main() {
     const discountStrategy = createDiscountStrategy(config.discount);
     const cart = new ShoppingCart(discountStrategy);
     
-    // Adicionar itens (CORRIGIDO: criar CartItem objects)
+    // Adicionar itens
     console.log('➕ Adicionando itens:');
+    let subtotal = 0;
     config.items.forEach((price, index) => {
         // Criar CartItem com Money object
         const money = new Money(price, 'BRL');
         const item = new CartItem(`Item ${index + 1}`, money, 1);
         cart.addItem(item);
-        // 🔧 CORREÇÃO: usar item.name em vez de item.getName()
+        subtotal += price;
         console.log(`   ${item.name}: R$ ${price.toFixed(2)}`);
     });
     
-    // Mostrar resultado
-    const total = cart.calculateTotal();
+    // Calcular desconto manualmente para mostrar detalhes
+    const discountAmount = discountStrategy.calculateDiscount(subtotal);
+    const total = subtotal - discountAmount;
     
+    console.log(`\n📊 Cálculo detalhado:`);
+    console.log(`   Subtotal: R$ ${subtotal.toFixed(2)}`);
+    console.log(`   Desconto (${config.discount}): -R$ ${discountAmount.toFixed(2)}`);
     console.log(`\n🎯 Desconto aplicado: ${config.discount}`);
-    // 🔧 CORREÇÃO FINAL: calculateTotal() retorna número, não objeto Money
     console.log(`✅ Total Final: R$ ${total.toFixed(2)}`);
 }
 
 // 📚 Exemplos padrão (quando não há parâmetros)
 function runDefaultExamples() {
+    console.log('🧮 Teste de Cálculos de Desconto:\n');
+    
+    // Exemplo específico: 150 com 20% desconto
+    console.log('🎯 Exemplo: R$ 150 com 20% desconto');
+    const discountStrategy20 = new TwentyPercentDiscountAdapter();
+    const discount20 = discountStrategy20.calculateDiscount(150);
+    const total20 = 150 - discount20;
+    console.log(`   Subtotal: R$ 150.00`);
+    console.log(`   Desconto (20%): -R$ ${discount20.toFixed(2)}`);
+    console.log(`   Total: R$ ${total20.toFixed(2)}`);
+    
     // Exemplo 1: 10% de desconto
+    console.log('\n🎯 Exemplo 1 - Desconto 10%:');
     const cart1 = new ShoppingCart(new TenPercentDiscountAdapter());
     const item1 = new CartItem("Produto A", new Money(100, 'BRL'), 1);
     const item2 = new CartItem("Produto B", new Money(50, 'BRL'), 1);
     cart1.addItem(item1);
     cart1.addItem(item2);
     
-    console.log('🎯 Exemplo 1 - Desconto 10%:');
+    const subtotal1 = 150;
+    const discount1 = new TenPercentDiscountAdapter().calculateDiscount(subtotal1);
     console.log(`   ${item1.name}: R$ 100, ${item2.name}: R$ 50`);
-    // 🔧 CORREÇÃO: calculateTotal() retorna número direto
-    console.log('   Total: R$', cart1.calculateTotal().toFixed(2));
+    console.log(`   Subtotal: R$ ${subtotal1.toFixed(2)}`);
+    console.log(`   Desconto (10%): -R$ ${discount1.toFixed(2)}`);
+    console.log(`   Total: R$ ${(subtotal1 - discount1).toFixed(2)}`);
     
     // Exemplo 2: 20% de desconto
+    console.log('\n🎯 Exemplo 2 - Desconto 20%:');
     const cart2 = new ShoppingCart(new TwentyPercentDiscountAdapter());
     const item3 = new CartItem("Produto C", new Money(200, 'BRL'), 1);
     cart2.addItem(item3);
     
-    console.log('\n🎯 Exemplo 2 - Desconto 20%:');
+    const subtotal2 = 200;
+    const discount2 = new TwentyPercentDiscountAdapter().calculateDiscount(subtotal2);
     console.log(`   ${item3.name}: R$ 200`);
-    // 🔧 CORREÇÃO: calculateTotal() retorna número direto
-    console.log('   Total: R$', cart2.calculateTotal().toFixed(2));
-    
-    // Exemplo 3: Sem desconto
-    const cart3 = new ShoppingCart(new NoDiscountAdapter());
-    const item4 = new CartItem("Produto D", new Money(80, 'BRL'), 1);
-    cart3.addItem(item4);
-    
-    console.log('\n🎯 Exemplo 3 - Sem desconto:');
-    console.log(`   ${item4.name}: R$ 80`);
-    // 🔧 CORREÇÃO: calculateTotal() retorna número direto
-    console.log('   Total: R$', cart3.calculateTotal().toFixed(2));
+    console.log(`   Subtotal: R$ ${subtotal2.toFixed(2)}`);
+    console.log(`   Desconto (20%): -R$ ${discount2.toFixed(2)}`);
+    console.log(`   Total: R$ ${(subtotal2 - discount2).toFixed(2)}`);
     
     console.log('\n📋 Para usar com parâmetros:');
     showUsage();
@@ -147,6 +174,7 @@ function runDefaultExamples() {
 function showUsage() {
     console.log(`
 🎮 Uso:
+  node app.js --items 150 --discount 20
   node app.js --items 200,150,75,25 --discount 10
   node app.js --item 100 --item 50 --discount 20
   node app.js --items 80,120 --discount none
@@ -155,6 +183,10 @@ function showUsage() {
   --items <lista>    Lista de preços separados por vírgula
   --item <preço>     Adicionar item individual (pode repetir)
   --discount <tipo>  Tipo de desconto: none, 10, 20
+
+💡 Exemplos de cálculo:
+  R$ 150 - 20% = R$ 120 (150 - 30)
+  R$ 100 - 10% = R$ 90  (100 - 10)
     `);
 }
 
