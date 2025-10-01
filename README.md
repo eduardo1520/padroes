@@ -553,4 +553,4 @@ ISC License - Sinta-se livre para usar este código como base para seus projetos
 
 ---
 
-⭐⭐Desenvolvido com ❤️ usando Arquitetura Hexagonal e Strategy Pattern**
+⭐⭐Desenvolvido com ❤️ usando Arquitetura Hexagonal e Strategy Pattern**# Projeto atualizado por edumiol
