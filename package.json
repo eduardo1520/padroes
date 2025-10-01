@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "name": "padroes-projeto",
+  "version": "1.0.0",
+  "description": "Projeto com Strategy Pattern e Arquitetura Hexagonal",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["strategy-pattern", "hexagonal-architecture", "design-patterns"],
+  "author": "edumiol",
+  "license": "ISC"
+}
