@@ -108,6 +108,36 @@ cd shopping-cart
 # Instalar dependências (se houver)
 npm install
 ```
+## 🔧 Build TypeScript → JavaScript
+
+- Instalar dependências:
+```bash
+npm install
+```
+
+- Compilar (gera `dist\\` conforme `tsconfig.json`):
+```bash
+npm run build
+```
+
+- Executar o build compilado:
+```bash
+node dist\\main.js
+```
+
+- Executar com parâmetros:
+```bash
+node dist\\main.js --items 100,50 --discount 20
+```
+
+- Iniciar (compila e executa):
+```bash
+npm start
+```
+
+- Modo watch (recompila a cada mudança):
+```bash
+npx tsc -w
 
 ### Execução Básica
 
