@@ -1,23 +1,7 @@
 import { withDataProvider, withNamedDataProvider } from '../../helpers/DataProviders.js';
-
-// ✅ Definir as classes necessárias dentro do teste
-class NoDiscountAdapter {
-    calculateDiscount(total) {
-        return 0; // Sem desconto
-    }
-}
-
-class TenPercentDiscountAdapter {
-    calculateDiscount(total) {
-        return total * 0.1; // 10% de desconto
-    }
-}
-
-class TwentyPercentDiscountAdapter {
-    calculateDiscount(total) {
-        return total * 0.2; // 20% de desconto
-    }
-}
+import NoDiscountAdapter from '../../../dist/infrastructure/adapters/NoDiscountAdapter.js';
+import TenPercentDiscountAdapter from '../../../dist/infrastructure/adapters/TenPercentDiscountAdapter.js';
+import TwentyPercentDiscountAdapter from '../../../dist/infrastructure/adapters/TwentyPercentDiscountAdapter.js';
 
 class Money {
     constructor(amount) {
@@ -69,7 +53,6 @@ class ShoppingCart {
 describe('ShoppingCart Entity', () => {
     
     describe('Discount Strategies', () => {
-        // Data Provider para diferentes estratégias de desconto
         const discountStrategies = {
             'No Discount': [new NoDiscountAdapter(), [100, 50, 25], 175],
             '10% Discount': [new TenPercentDiscountAdapter(), [100, 50, 25], 157.5],
@@ -110,7 +93,6 @@ describe('ShoppingCart Entity', () => {
     describe('Constructor', () => {
         it('should create empty cart', () => {
             const cart = new ShoppingCart();
-            
             expect(cart.getItems()).toEqual([]);
         });
     });

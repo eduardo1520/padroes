@@ -5,7 +5,7 @@
 
 /**
  * Executa testes com múltiplos conjuntos de dados
- * @param {Array} dataProvider - Array de dados para teste
+ * @param {Array<any>} dataProvider - Array de dados para teste
  * @param {string} description - Descrição do teste
  * @param {Function} testFunction - Função de teste a ser executada
  */
@@ -45,7 +45,7 @@ export function withNamedDataProvider(namedData, description, testFunction) {
 
 /**
  * Data provider para testes de validação
- * @param {Array} invalidInputs - Array de inputs inválidos
+ * @param {Array<any>} invalidInputs - Array de inputs inválidos    
  * @param {string} description - Descrição do teste
  * @param {Function} testFunction - Função que deve lançar erro
  */

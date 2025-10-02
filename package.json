@@ -3,12 +3,29 @@
   "name": "padroes-projeto",
   "version": "1.0.0",
   "description": "Projeto com Strategy Pattern e Arquitetura Hexagonal",
-  "main": "app.js",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build && node dist/main.js",
+    "build": "tsc",
+    "test": "npm run build && jasmine --config=spec/support/jasmine.dist.json",
+    "test:ts": "ts-node node_modules/jasmine/bin/jasmine --config=spec/support/jasmine.src.json",
+    "test:coverage": "npm run build && c8 -r text -r html jasmine --config=spec/support/jasmine.dist.json",
+    "test:coverage:ts": "c8 -r text -r html --include=src/**/*.{ts,tsx} ts-node node_modules/jasmine/bin/jasmine --config=spec/support/jasmine.src.json"
   },
-  "keywords": ["strategy-pattern", "hexagonal-architecture", "design-patterns"],
+  "keywords": [
+    "strategy-pattern",
+    "hexagonal-architecture",
+    "design-patterns"
+  ],
   "author": "edumiol",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "^5.1.9",
+    "@types/node": "^24.6.2",
+    "c8": "^10.1.3",
+    "jasmine": "^5.11.0",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
 }

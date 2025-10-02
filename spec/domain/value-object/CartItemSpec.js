@@ -1,7 +1,16 @@
 import { withDataProvider, withValidationProvider } from '../../helpers/DataProviders.js';
 
 // Classe CartItem simples para demonstrar Data Providers
+/**
+ * Representa um item no carrinho de compras.
+ * @class
+ */
 class CartItem {
+    /**
+     * @param {string} name - O nome do item.
+     * @param {number} price - O preço unitário do item.
+     * @param {number} [quantity=1] - A quantidade do item.
+     */
     constructor(name, price, quantity = 1) {
         if (!name || typeof name !== 'string' || name.trim() === '') {
             throw new Error('Invalid name');
@@ -26,7 +35,6 @@ class CartItem {
 }
 
 describe('CartItem Value Object', () => {
-    
     describe('Constructor', () => {
         // ✅ Converter para array simples em vez de objeto nomeado
         const constructorData = [
@@ -37,7 +45,14 @@ describe('CartItem Value Object', () => {
             ['Product E', 10, 0] // ✅ quantity deve ser 0
         ];
 
-        withDataProvider(constructorData, 'should create CartItem', (name, price, quantity) => {
+        withDataProvider(constructorData, 'should create CartItem', 
+            /**
+             * Testa a criação de um objeto CartItem com entradas válidas.
+             * @param {string} name - O nome do item.
+             * @param {number} price - O preço unitário do item.
+             * @param {number} [quantity=1] - A quantidade do item.
+             */
+            (name, price, quantity) => {
             const item = new CartItem(name, price, quantity);
             expect(item.getName()).toBe(name.trim ? name.trim() : name);
             expect(item.getPrice()).toBe(price);

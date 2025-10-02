@@ -1,14 +1,8 @@
 {
   "include": [
-    "src/**/*.js"
+    "dist/**/*.js"
   ],
-  "exclude": [
-    "spec/**/*.js",
-    "node_modules/**",
-    "coverage/**",
-    "*.config.js",
-    "src/main.js"
-  ],
+  "exclude": ["spec/**", "node_modules/**"],
   "extension": [
     ".js"
   ],
@@ -20,5 +14,7 @@
   "lines": 85,
   "functions": 85,
   "branches": 80,
-  "statements": 85
+  "statements": 85,
+  "sourceMap": true,
+  "instrument": true
 }

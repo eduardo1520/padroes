@@ -1,7 +1,7 @@
 // 🎯 Imports corretos da arquitetura hexagonal (src/)
-import ShoppingCart from './src/domain/entities/ShoppingCart.js';
-import CartItem from './src/domain/value-objects/CartItem.js';
-import Money from './src/domain/value-objects/Money.js';
+import ShoppingCart from './dist/domain/entities/ShoppingCart.js';
+import CartItem from './dist/domain/value-objects/CartItem.js';
+import Money from './dist/domain/value-objects/Money.js';
 
 // 🎯 Implementação correta dos adapters de desconto
 class NoDiscountAdapter {
@@ -62,20 +62,18 @@ function parseArguments(args) {
     return config;
 }
 
-// 🎪 Função para criar estratégia de desconto
-function createDiscountStrategy(discountType) {
-    switch (discountType.toLowerCase()) {
-        case '10':
-        case 'ten':
-            return new TenPercentDiscountAdapter();
-        case '20':
-        case 'twenty':
-            return new TwentyPercentDiscountAdapter();
-        case 'none':
-        case 'no':
-        default:
-            return new NoDiscountAdapter();
+// 🎯 Criar estratégia de desconto com base no argumento
+function createDiscountStrategy(discount) {
+    if (!discount || discount === 'none' || discount === '0') {
+        return new NoDiscountAdapter();
     }
+    if (discount === '10') {
+        return new TenPercentDiscountAdapter();
+    }
+    if (discount === '20') {
+        return new TwentyPercentDiscountAdapter();
+    }
+    return new NoDiscountAdapter(); // Padrão
 }
 
 // 🚀 Função principal

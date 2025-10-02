@@ -1,0 +1,1 @@
+{"version":3,"file":"TenPercentDiscountAdapter.d.ts","sourceRoot":"","sources":["../../../src/infrastructure/adapters/TenPercentDiscountAdapter.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,MAAM,iDAAiD,CAAC;AAExF,MAAM,CAAC,OAAO,OAAO,yBAA0B,YAAW,gBAAgB;IACxE,iBAAiB,CAAC,KAAK,EAAE,MAAM,GAAG,MAAM;CAGzC"}

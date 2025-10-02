@@ -1,6 +1,6 @@
-import DependencyInjection from '../../src/infrastructure/config/DependencyInjection.js';
+import DependencyInjection from '../../dist/infrastructure/config/DependencyInjection.js';
 
-describe('Cart Use Case Integration', () => {
+    describe('Cart Use Case Integration', () => {
     let cartUseCase, cartRepository;
 
     beforeEach(() => {

@@ -1,6 +1,6 @@
 {
   "include": [
-    "src/**/*.js"
+    "src/**/*.ts"
   ],
   "exclude": [
     "spec/**/*.js",
@@ -9,10 +9,11 @@
     "*.config.js",
     "app.js",
     "debug-test.js",
-    "test-simple.js"
+    "test-simple.js",
+    "dist/**"
   ],
   "extension": [
-    ".js"
+    ".ts"
   ],
   "reporter": [
     "text",

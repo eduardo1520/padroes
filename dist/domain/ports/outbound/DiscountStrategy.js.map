@@ -1,0 +1,1 @@
+{"version":3,"file":"DiscountStrategy.js","sourceRoot":"","sources":["../../../../src/domain/ports/outbound/DiscountStrategy.ts"],"names":[],"mappings":"","sourcesContent":["export interface DiscountStrategy {\r\n  calculateDiscount(total: number): number;\r\n}"]}
