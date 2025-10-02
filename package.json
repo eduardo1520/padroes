@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "padroes-projeto",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Projeto com Strategy Pattern e Arquitetura Hexagonal",
   "main": "dist/main.js",
   "scripts": {
